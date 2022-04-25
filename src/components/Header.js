@@ -1,13 +1,23 @@
 import React,{useState} from 'react'
-import {Link } from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import {Box,Avatar,Typography} from '@mui/material'
 import { useDispatch } from 'react-redux';
+import { Editbtn } from './reducer/ProfileReducer';
 
+
+import { useSelector } from 'react-redux';
 const Header = () => {
+  const navigate = useNavigate()
+  let history = useHistory();
 
-  const [Clicked,setClicked] = useState(false)
+  function handleClick() {
+    history.push("/");
+  }
 
-  const [Edit,setEdit] = useState(false)
+  const [Clicked,setClicked] = useState(true)
+
+
+ const finder=useSelector((state )=> state.profile)
 
 const  Dispatch =useDispatch()
 
@@ -39,19 +49,15 @@ const  Dispatch =useDispatch()
 
                                 {Clicked? 
                                 <button className='rounded-full bg-[#22D3EE] px-8 py-2 mr-8 '>save</button>:
-                                <button className='rounded-full bg-[#22D3EE] px-8 py-2 mr-8 ' onClick={()=>{setEdit(current => !current)}} >edit</button>}
+                                <button className='rounded-full bg-[#22D3EE] px-8 py-2 mr-8 ' onClick={()=>(Dispatch(Editbtn(!finder.getting)))}>edit</button>}
                                 <button className='rounded-full bg-[#252F2E] text-white px-7 py-2'>sendMessage</button>
                         </div>
                     </Box>
                 </Box>
-                <Box className='flex  flex-rows flex items-center w-full h-[40px] '>
-                
-                <Link to="/">
-                <button className='p-2 rounded-full hover:bg-[#959CA9]'onClick={()=>{setClicked(true)}} >Timeline</button></Link>
-                <Link to="/about">
-                <button className='p-2 rounded-full hover:bg-[#959CA9]' onClick={()=>{setClicked(false)}} >About</button></Link> 
-                <Link to="/photos">
-                <button className='p-2 rounded-full hover:bg-[#959CA9]'onClick={()=>{setClicked(true)}} >Photos & Videos</button></Link> 
+                <Box className='flex  flex-rows flex items-center w-full h-[40px] -mr-10'>
+                <button className='p-2 rounded-full hover:bg-[#959CA9]'onClick={()=>{setClicked(true);handleClick()}} >Timeline</button>
+                <button className='p-2 rounded-full hover:bg-[#959CA9]' onClick={()=>{setClicked(false);navigate("/about")}}  >About</button>
+                <button className='p-2 rounded-full hover:bg-[#959CA9]'onClick={()=>{setClicked(true);navigate("/photos")}}   >Photos & Videos</button>
                 </Box>
     </Box>
   </Box>

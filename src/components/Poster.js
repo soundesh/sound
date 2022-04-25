@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React from 'react'
 import { useForm } from 'react-hook-form';
 import {Box,Paper,TextareaAutosize} from '@mui/material'
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
@@ -19,7 +19,6 @@ fetch(url)
 
 const Poster = () => {
 
-  const [Post,SetPost]=useState()
 
     const {register,handleSubmit} = useForm();
       const onSubmit = (data) => console.log(data);
