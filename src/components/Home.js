@@ -8,7 +8,79 @@ import Poster from './Poster';
 
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Paper from '@mui/material/Paper'
+import axios from 'axios';
 
+
+const promise1=new Promise((resovle,reject) =>{
+  setTimeout(() => {
+    console.log("runnig 0.5s")
+  }, 500);
+
+})
+
+
+
+
+promise1.then(console.log)
+
+const promise2=new Promise((resovle,reject) =>{
+  setTimeout(() => {
+    console.log("runnig 3s")
+  }, 3000);
+
+})
+
+promise2.then(console.log)
+
+const promise3=new Promise((resovle,reject) =>{
+  setTimeout(() => {
+    console.log("runnig 5s")
+  }, 5000);
+
+})
+
+
+
+
+const promise4=new Promise((resovle,reject) =>{
+  setTimeout(() => {
+    const a=10
+    const b=20
+   return a+b
+  }, 5000);
+
+})
+promise3.then(console.log)
+
+const gettingData=new Promise((resovle,reject) =>{
+
+  try{
+       const res=resovle( axios.get("https://dummyjson.com/products/1"))
+  }catch(error){
+    console.error(error)
+  }
+})
+
+const rejectingData=new Promise((resovle,reject) =>{
+
+  try{
+       const res=resovle( axios.get("https://dummyjson.com/products/1"))
+       return res
+  }catch(error){
+    console.error(error)
+  }
+})
+console.log(rejectingData)
+
+gettingData.then(console.log).catch(console.log)
+
+
+const  settingData = async () => {
+  
+   const data = axios.get(process.env.REACT_APP_URL)
+   return data
+}
+settingData().then(console.log).catch(console.log)
 
 
 const Home = () => {

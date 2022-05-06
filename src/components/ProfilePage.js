@@ -18,12 +18,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 const ProfilePage = () => {
-  const editor = useSelector((state) => state.profile);
-
+  const editor = useSelector((state) => state.profile.value)
   const Dispatch = useDispatch();
-
-  const regMatch =
-    /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm;
 
   const schema = yup
     .object({
@@ -60,26 +56,10 @@ const ProfilePage = () => {
     control,
     formState: { errors },
   } = useForm({
-    defaultValues: {
-      gender: "",
-      locations: "",
-      about: "",
-      birthday: "",
-      jobs: "",
-      occupation: "",
-      skills: "",
-      address: "",
-      startDate: "",
-      endDate: "",
-      mobile1: "",
-      mobile2: "",
-      websites: "",
-      email: "",
-    },
+    defaultValues:editor[0],
     resolver: yupResolver(schema),
   });
-
-  const onSubmit = (data) => Dispatch(AddProfile(data));
+  const onSubmit = (data) => { Dispatch(AddProfile(data))};
   return (
     <Box>
       {editor.getting ? (
@@ -225,6 +205,7 @@ const ProfilePage = () => {
                         value={value}
                         label={"gender"}
                         {...register("gender", { required: true })}
+                        className='pl-8'
                       />
                     )}
                   />
@@ -370,8 +351,8 @@ const ProfilePage = () => {
                         <DatePicker
                           views={["year"]}
                           label="start year"
-                          minDate={new Date("2012-03-01")}
-                          maxDate={new Date("2023-06-01")}
+                          minDate={new Date("2000-03-01")}
+                          maxDate={new Date("2024-06-01")}
                           onChange={onChange}
                           value={value}
                           renderInput={(params) => (
@@ -379,13 +360,14 @@ const ProfilePage = () => {
                               {...params}
                               helperText={null}
                               {...register("startDate", { required: true })}
-                              className="min-w-100 m-2 "
+                              className="min-w-100 pt-2"
                             />
                           )}
                         />
                       )}
                     />
                   </LocalizationProvider>
+              
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <Controller
                       control={control}

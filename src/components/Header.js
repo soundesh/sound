@@ -8,12 +8,7 @@ import { Editbtn } from './reducer/ProfileReducer';
 import { useSelector } from 'react-redux';
 const Header = () => {
   const navigate = useNavigate()
-  let history = useHistory();
-
-  function handleClick() {
-    history.push("/");
-  }
-
+ 
   const [Clicked,setClicked] = useState(true)
 
 
@@ -55,9 +50,10 @@ const  Dispatch =useDispatch()
                     </Box>
                 </Box>
                 <Box className='flex  flex-rows flex items-center w-full h-[40px] -mr-10'>
-                <button className='p-2 rounded-full hover:bg-[#959CA9]'onClick={()=>{setClicked(true);handleClick()}} >Timeline</button>
+                <button className='p-2 rounded-full hover:bg-[#959CA9]'onClick={()=>{setClicked(true);navigate("/")}} >Timeline</button>
                 <button className='p-2 rounded-full hover:bg-[#959CA9]' onClick={()=>{setClicked(false);navigate("/about")}}  >About</button>
                 <button className='p-2 rounded-full hover:bg-[#959CA9]'onClick={()=>{setClicked(true);navigate("/photos")}}   >Photos & Videos</button>
+                
                 </Box>
     </Box>
   </Box>

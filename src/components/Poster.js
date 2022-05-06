@@ -6,15 +6,6 @@ import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import RoomIcon from '@mui/icons-material/Room';
 
 
-let url = 'https://bavapayments.mocklab.io/transaction';
-let data =[]
-fetch(url)
-.then(res => res.json())
-.then((out) => {
-  data.push(out)
-})
-.catch(err => { throw err });  
-
 
 
 const Poster = () => {
